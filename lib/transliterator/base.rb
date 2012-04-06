@@ -52,8 +52,13 @@ module Transliterator
     #
     # @return [Transliterator::Base] The +Transliterator::Base+ instance
     def initialize
-      @approximations = {}
-      APPROXIMATIONS.inject(@approximations) do |memo, object|
+      if self.class < Base
+        @approximations = self.class.superclass.instance.approximations.dup
+      else
+        @approximations = {}
+      end
+      
+      self.class::APPROXIMATIONS.inject(@approximations) do |memo, object|
         index       = object[0].unpack("U").shift
         value       = object[1].unpack("C*")
         memo[index] = value.length == 1 ? value[0] : value
