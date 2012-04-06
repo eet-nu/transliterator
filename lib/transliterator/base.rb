@@ -61,10 +61,6 @@ module Transliterator
       end
     end
     
-    def [](codepoint)
-      approximations[codepoint] || codepoint
-    end
-    
     # Transliterate a given string's UTF-8 characters to their ASCII equivalants.
     #
     #     transliterator = Transliterator::Base.instance
@@ -73,7 +69,7 @@ module Transliterator
     # @return [String] The transliterated string
     def transliterate(string)
       string.unpack("U*")
-            .map { |char| self[char] }
+            .map { |codepoint| approximations[codepoint] || codepoint }
             .flatten
             .pack("U*")
     end

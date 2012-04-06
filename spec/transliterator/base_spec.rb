@@ -24,16 +24,6 @@ describe Transliterator::Base do
     end
   end
   
-  describe '#[]' do
-    it 'returns the approximation for the given codepoint' do
-      subject[215].should == 120
-    end
-    
-    it 'returns the codepoint if an approximation is not found' do
-      subject[97].should == 97
-    end
-  end
-  
   describe '#transliterate' do
     it 'transliterates math related characters' do
       subject.transliterate("5 × 10 ÷ 2 ‐ 5 = 20").should == '5 x 10 / 2 - 5 = 20'
