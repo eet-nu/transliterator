@@ -7,4 +7,8 @@ module Transliterator
   autoload :Latin,    'transliterator/latin'
   
   autoload :Text,     'transliterator/text'
+  
+  def self.transliterate(input)
+    Text.new(input).transliterate
+  end
 end
