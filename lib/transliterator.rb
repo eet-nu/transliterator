@@ -11,4 +11,8 @@ module Transliterator
   def self.transliterate(input)
     Text.new(input).transliterate
   end
+  
+  def self.asciify(input)
+    transliterate(input).gsub(/[^\x00-\x7f]/u, '')
+  end
 end
