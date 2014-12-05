@@ -21,7 +21,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    Transliterator::Text.new('text').transliterate(
+      Transliterator::Base.instance,
+      Transliterator::Cyrillic.instance,
+      Transliterator::Greek.instance,
+      Transliterator::Latin.instance
+    )
 
 ## Contributing
 
