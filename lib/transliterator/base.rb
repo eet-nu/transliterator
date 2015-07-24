@@ -5,7 +5,7 @@ require 'singleton'
 module Transliterator
   class Base
     include Singleton
-    
+
     APPROXIMATIONS = {
       "×" => "x",
       "÷" => "/",
@@ -14,7 +14,6 @@ module Transliterator
       "‒" => "-",
       "–" => "-",
       "—" => "-",
-      "―" => "-",
       "―" => "-",
       "‘" => "'",
       "‛" => "'",
@@ -39,16 +38,16 @@ module Transliterator
       "\xe2\x81\x9f" => " ",
       "\xe3\x80\x80" => " ",
     }.freeze
-    
+
     attr_reader :approximations
-    
+
     # Initializes a new +Transliterator::Base+ instance.
     #
     # Because +Transliterator::Base+ is a singleton, you can only get an
     # instance of it by calling the +#instance+ class method on it:
     #
     #     Transliterator::Base.new      # => NoMethodError: private method `new' called for Transliterator::Base:Class
-    #     Transliterator::Base.instance # => #<Transliterator::Base:0x007f9b8c086e78> 
+    #     Transliterator::Base.instance # => #<Transliterator::Base:0x007f9b8c086e78>
     #
     # @return [Transliterator::Base] The +Transliterator::Base+ instance
     def initialize
@@ -57,7 +56,7 @@ module Transliterator
       else
         @approximations = {}
       end
-      
+
       self.class::APPROXIMATIONS.inject(@approximations) do |memo, object|
         index       = object[0].unpack("U").shift
         value       = object[1].unpack("C*")
@@ -65,7 +64,7 @@ module Transliterator
         memo
       end
     end
-    
+
     # Transliterate a given string's UTF-8 characters to their ASCII equivalants.
     #
     #     transliterator = Transliterator::Base.instance
